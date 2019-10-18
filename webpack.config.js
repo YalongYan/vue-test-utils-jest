@@ -70,7 +70,7 @@ module.exports = {
           name: '[name].[ext]?[hash]'
         }
       },
-      { 
+      {
       　　test: /\.(svg|ttf|eot|woff|woff2)$/, 
       　　loader: 'url-loader', 
       　　options:{ 
@@ -104,7 +104,7 @@ module.exports = {
       new UglifyJsPlugin({
         uglifyOptions: {
           compress: {
-            warnings: false,
+            // warnings: false,
             // drop_debugger: true,
             // drop_console: true
           },
