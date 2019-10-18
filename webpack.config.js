@@ -1,5 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   entry: './src/main.js',
@@ -66,6 +69,14 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      { 
+      　　test: /\.(svg|ttf|eot|woff|woff2)$/, 
+      　　loader: 'url-loader', 
+      　　options:{ 
+  　　　　   name:'fonts/[name].[ext]',
+            limit: 9999999
+      　　} 
       }
     ]
   },
@@ -77,13 +88,31 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true,
+    noInfo: false,
     overlay: true
   },
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new VueLoaderPlugin()
+  ],
+  optimization: {
+    minimize: true, 
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          compress: {
+            warnings: false,
+            // drop_debugger: true,
+            // drop_console: true
+          },
+          sourceMap: false
+        }
+      })
+    ]
+  }
 }
 
 if (process.env.NODE_ENV === 'production') {
@@ -95,14 +124,15 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: '"production"'
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false
-      }
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true
-    })
+    new MiniCssExtractPlugin({filename:'mian.css'})
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     warnings: false
+    //   }
+    // }),
+    // new webpack.LoaderOptionsPlugin({
+    //   minimize: true
+    // })
   ])
 }
