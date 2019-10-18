@@ -5,45 +5,46 @@
       active-color="#13ce66"
       inactive-color="#ff4949">
     </el-switch>
+    <img :src="logoImg" v-if="switchvalue" class="logoImg">
+    <Select ref="select"/>
+    <div class="line"></div>
+    <Form ref='form'/>
   </div>
 </template>
 
 <script>
+import Form from './components/Form'
+import Select from './components/Select'
+import logoImg from './assets/logo.png'
+
 export default {
   name: 'app',
   data () {
     return {
-      switchvalue: true
+      switchvalue: true,
+      logoImg: logoImg
     }
+  },
+  components: {
+    Form,
+    Select
   }
 }
 </script>
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  padding: 20px;
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+  .logoImg{
+    width: 23px;
+    vertical-align: middle;
+  }
+  .line{
+    display: inline-block;
+    width: 100%;
+    height: 0px;
+    border: 1px solid #3b3a3a;
+  }
 }
 </style>
