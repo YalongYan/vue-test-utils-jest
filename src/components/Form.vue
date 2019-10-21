@@ -16,8 +16,8 @@
       <el-input type="textarea" v-model="ruleForm.desc"></el-input>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-      <el-button @click="resetForm('ruleForm')">重置</el-button>
+      <el-button class="confirm" type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
+      <el-button class="reset" @click="resetForm('ruleForm')">重置</el-button>
     </el-form-item>
   </el-form>
 </div>  
@@ -28,16 +28,7 @@
   export default {
     data() {
       return {
-        ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
+        ruleForm: this.initFormData,
         rules: {
           name: [
             { required: true, message: '请输入活动名称', trigger: 'blur' },
@@ -49,18 +40,43 @@
           desc: [
             { required: true, message: '请填写活动形式', trigger: 'blur' }
           ]
-        }
+        },
+        sucess: false
       };
+    },
+    props:{
+      initFormData: {
+        type: Object,
+        default: () => {
+          {
+            name: '';
+            type: [];
+            desc: ''
+          }
+        }
+      }
+    },
+    watch: {
+      initFormData: {
+        handler(n, o){
+          this.ruleForm = n
+        },
+        deep: true
+      }
     },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            axios.get('http://rap2api.taobao.org/app/mock/233956/tbl-unit-test').then(res => {
-              console.log(res)
+            let url = 'http://rap2api.taobao.org/app/mock/233956/tbl-unit-test?name=' + this.ruleForm.name + '&nature=' + this.ruleForm.type.join(',') + '&form=' + this.ruleForm.form
+            axios.get(url).then(res => {
+              if (res.status === 200) {
+                this.sucess = true
+              } else {
+                this.sucess= false
+              }
             })
           } else {
-            console.log('error submit!!');
             return false;
           }
         });

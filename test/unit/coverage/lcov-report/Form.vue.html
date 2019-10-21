@@ -22,22 +22,22 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>0/16</span>
+        <span class='fraction'>0/25</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>0/4</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>0/13</span>
+        <span class='fraction'>0/22</span>
       </div>
     </div>
   </div>
@@ -122,7 +122,23 @@
 77
 78
 79
-80</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -172,6 +188,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,8 +210,12 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -219,8 +251,8 @@
       &lt;el-input type="textarea" v-model="ruleForm.desc"&gt;&lt;/el-input&gt;
     &lt;/el-form-item&gt;
     &lt;el-form-item&gt;
-      &lt;el-button type="primary" @click="submitForm('ruleForm')"&gt;立即创建&lt;/el-button&gt;
-      &lt;el-button @click="resetForm('ruleForm')"&gt;重置&lt;/el-button&gt;
+      &lt;el-button class="confirm" type="primary" @click="submitForm('ruleForm')"&gt;立即创建&lt;/el-button&gt;
+      &lt;el-button class="reset" @click="resetForm('ruleForm')"&gt;重置&lt;/el-button&gt;
     &lt;/el-form-item&gt;
   &lt;/el-form&gt;
 &lt;/div&gt;  
@@ -231,16 +263,7 @@
   export default {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    data() {</span></span>
 <span class="cstat-no" title="statement not covered" >      return {</span>
-        ruleForm: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
+        ruleForm: this.initFormData,
         rules: {
           name: [
             { required: true, message: '请输入活动名称', trigger: 'blur' },
@@ -252,18 +275,43 @@
           desc: [
             { required: true, message: '请填写活动形式', trigger: 'blur' }
           ]
-        }
+        },
+        sucess: false
       };
+    },
+    props:{
+      initFormData: {
+        type: Object,
+<span class="fstat-no" title="function not covered" >        default: () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          {</span>
+<span class="cstat-no" title="statement not covered" >            name: '';</span>
+<span class="cstat-no" title="statement not covered" >            type: [];</span>
+<span class="cstat-no" title="statement not covered" >            desc: ''</span>
+          }
+        }
+      }
+    },
+    watch: {
+      initFormData: {
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        handler(n, o){</span></span>
+<span class="cstat-no" title="statement not covered" >          this.ruleForm = n</span>
+        },
+        deep: true
+      }
     },
     methods: {
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      submitForm(formName) {</span></span>
 <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        this.$refs[formName].validate((valid) =&gt; {</span></span></span>
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >          if (valid) {</span></span>
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >            axios.get('http://rap2api.taobao.org/app/mock/233956/tbl-unit-test').then(res =&gt; {</span></span></span>
-<span class="cstat-no" title="statement not covered" >              console.log(res)</span>
+<span class="cstat-no" title="statement not covered" >          if (valid) {</span>
+<span class="cstat-no" title="statement not covered" >            let url = 'http://rap2api.taobao.org/app/mock/233956/tbl-unit-test?name=' + this.ruleForm.name + '&amp;nature=' + this.ruleForm.type.join(',') + '&amp;form=' + this.ruleForm.form</span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >            axios.get(url).then(res =&gt; {</span></span></span>
+<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >              if (res.status === 200) {</span></span>
+<span class="cstat-no" title="statement not covered" >                this.sucess = true</span>
+<span class="cstat-no" title="statement not covered" >              } else {</span>
+<span class="cstat-no" title="statement not covered" >                this.sucess= false</span>
+              }
             })
 <span class="cstat-no" title="statement not covered" >          } else {</span>
-<span class="cstat-no" title="statement not covered" >            console.log('error submit!!');</span>
 <span class="cstat-no" title="statement not covered" >            return false;</span>
           }
         });
@@ -286,7 +334,7 @@
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Oct 18 2019 16:31:55 GMT+0800 (GMT+08:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Oct 21 2019 16:09:34 GMT+0800 (GMT+08:00)
 </div>
 </div>
 <script src="prettify.js"></script>

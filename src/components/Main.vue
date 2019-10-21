@@ -1,34 +1,36 @@
 <template>
   <div class="container">
-    <h3> 随便测测</h3>
+    <h3> 图片显隐控制</h3>
     <el-switch
       v-model="switchvalue"
       active-color="#13ce66"
       inactive-color="#ff4949">
     </el-switch>
-    <img :src="logoImg" v-if="switchvalue" class="logoImg">
-    <Select ref="select"/>
+    <span v-if="switchvalue" class="imgContainer"><img :src="logoImg" class="logoImg"> </span>
     <div class="line"></div>
     <h3> 表单请求：</h3>
-    <Form ref='form'/>
+    <Form ref='form' :initFormData='initFormData' />
   </div>
 </template>
 
 <script>
 import Form from './Form'
-import Select from './Select'
 import logoImg from './../assets/logo.png'
 
 export default {
   data () {
     return {
       switchvalue: true,
-      logoImg: logoImg
+      logoImg: logoImg,
+      initFormData: {
+        name: '团建',
+        type: [],
+        desc: ''
+      }
     }
   },
   components: {
-    Form,
-    Select
+    Form
   }
 }
 </script>

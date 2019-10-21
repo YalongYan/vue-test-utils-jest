@@ -12,7 +12,7 @@ module.exports = {
     moduleNameMapper: {
         '^@\/(.*?\.?(js|vue)?|)$': '<rootDir>/src/$1',   // @路径转换，例如：@/components/Main.vue -> rootDir/src/components/Main.vue
         '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': '<rootDir>/test/unit/__mocks__/fileMock.js', // 模拟加载静态文件
-        '\\.(css|less|scss|sass)$': 'identity-obj-proxy'　　// 模拟加载样式文件   
+        '\\.(css|less|scss|sass)$': '<rootDir>/test/unit/__mocks__/styleMock.js'　　// 模拟加载样式文件   
     },
     testMatch: [ //匹配测试用例的文件
         '<rootDir>/test/unit/specs/*.spec.js'
