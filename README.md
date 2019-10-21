@@ -126,6 +126,7 @@ module.exports = 'test-file-stub';
 7. 在`specs`下写测试用例代码，像下图所示（组件名+spec）：
 
 ![image.png](https://upload-images.jianshu.io/upload_images/8551758-e2a6418442152477.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 8. 在`package.json` 的 `scripts` 里添加测试命令 
 ```
 "unit": "jest --config test/unit/jest.conf.js --coverage"
@@ -136,16 +137,22 @@ module.exports = 'test-file-stub';
 
 ### 编写测试用例
 先看下我演示的项目，如下
+
 ![image.png](https://upload-images.jianshu.io/upload_images/8551758-0aad2f9372bb3221.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 checkbox 开关控制图片的显隐
 表单请求有验证，点击立即创建触发表单验证，验证通过提交表单；点击重置按钮去掉验证提示。
 
 我的组件就两个
+
 ![image.png](https://upload-images.jianshu.io/upload_images/8551758-fc6089c603054a44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 一个`Form.vue`  一个 `Main.vue`, 就对这俩个组件测试。
 
 测试用例写了三个，如下
+
 ![image.png](https://upload-images.jianshu.io/upload_images/8551758-ca5731ce26b9558c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 里面详细的代码我就不贴出来了，可以去项目源码里面看。
 下面说下写这几个测试用例需要注意的地方
 1.由于项目用到了`element-ui` 所以在写测试用例的时候，也需要给模拟的`Vue(createLocalVue) install element-ui`
@@ -185,7 +192,9 @@ it('show switch img', () => {
 >因为Jest + Vue Test Utils这套环境中是没有  `axios`的，所以他不认 `axios`， 但是组件代码里面确实调用了`axios`, 那么我们就需要模拟一个 `axios` 出来
 
 新建  `axios.js` 文件
+
 ![image.png](https://upload-images.jianshu.io/upload_images/8551758-2d263c1d4d7cd165.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 `axios.js` 的内容如下:
 ```
 module.exports = {
@@ -235,8 +244,13 @@ describe('Test Form Request', () => {
 
 参考连接：
 [Vue Test Utils](https://vue-test-utils.vuejs.org/zh/guides/)
+
 [Jest Using With Wbpack](https://jestjs.io/docs/zh-Hans/webpack#%E5%A4%84%E7%90%86%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6)
+
 [使用jest对vue项目进行单元测试](https://segmentfault.com/a/1190000016299936)
+
  [ui组件如何进行单元测试](https://segmentfault.com/q/1010000006970956)
+
 [Jest Mock](https://blog.csdn.net/sinat_33312523/article/details/82970655)
+
 [用Jest测试Vue中的Methods中的方法和Mock依赖](https://www.jianshu.com/p/41eadb6409ba)
